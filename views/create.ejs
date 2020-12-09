@@ -1,0 +1,25 @@
+<!-- this page is for the creating of the notification -->
+
+<%- include('partials/header'); -%>
+
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="create-blog content">
+    <form action="/blogs" method="POST">
+      <label for="title">Blog title:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="snippet">Blog snippet:</label>
+      <input type="text" id="snippet" name="snippet" required>
+      <label for="body">Blog body:</label>
+      <textarea id="body" name="body" required></textarea>
+      <label for="person">Email</label>
+      <input type="text" id="person" name="person" value="<%= user.email %>">
+      <button>Submit</button>
+    </form>
+  </div>
+
+
+</body>
+<%- include('partials/footer'); -%>

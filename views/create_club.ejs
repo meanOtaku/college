@@ -1,0 +1,21 @@
+<!-- this page is for the creating of the notification -->
+
+<%- include('partials/header'); -%>
+
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="create-blog content">
+    <form action="/blogs" method="POST">
+      <label for="title">Club title:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="body">which Club:</label>
+      <textarea id="body" name="body" required></textarea>
+      <button>Submit</button>
+    </form>
+  </div>
+
+
+</body>
+<%- include('partials/footer'); -%>
