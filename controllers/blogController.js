@@ -1,4 +1,5 @@
 const Blog = require('../models/blog');
+const Links = require('../models/links');
 
 const blog_index = (req, res) => {
   Blog.find().sort({ createdAt: -1 })
@@ -11,11 +12,20 @@ const blog_index = (req, res) => {
 }
 
 const blog_details = (req, res) => {
+  var links = [] ;
+  Links.find().sort({ createdAt: -1 })
+  .then(result => {
+    links = result
+    console.log(links);
+  })
+  .catch(err => {
+    console.log(err);
+  });
   
   const id = req.params.id;
   Blog.findById(id)
     .then(result => {
-      res.render('details', { blog: result, title: 'Blog Details' });
+      res.render('details', { blog: result, title: 'Blog Details' , links : links});
       res.status(200).json({ blog: blog._id });
     })
     .catch(err => {
@@ -51,6 +61,17 @@ const blog_delete = (req, res) => {
     });
 }
 
+const blog_create_link_post = (req, res) => {
+     const links = new Links(req.body);
+      links.save()
+      .then(result => {
+       res.redirect('/blogs');
+    })
+    .catch(err => {
+        console.log(err);
+      });
+  }
+
 // const blog_search = (req,res, next) => {
 //   const regex = new RegExp(req.query["term"], 'i');
 //   const blog = Blog.find({name:regex}, {'name':1}).sort({"updated_at": -1}).sort({"created_at": -1}).limit(20);
@@ -78,5 +99,6 @@ module.exports = {
   blog_create_get, 
   blog_create_post, 
   blog_delete,
+  blog_create_link_post
  
 }

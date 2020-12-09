@@ -1,5 +1,34 @@
 const Club = require("../models/Club");
 const Youtube = require("../models/youtube"); 
+
+
+
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { link: '', person: '' };
+
+  // duplicate email error
+  if (err.code === 11000) {
+    errors.link = 'that link is already registered';
+    return errors;
+  }
+
+  // validation errors
+  if (err.message.includes('user validation failed')) {
+    // console.log(err);
+    Object.values(err.errors).forEach(({ properties }) => {
+      // console.log(val);
+      // console.log(properties);
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  return errors;
+}
+
+
+
+
 const club_index = (req, res) => {
   Club.find().sort({ createdAt: -1 })
     .then(result => {
@@ -11,11 +40,19 @@ const club_index = (req, res) => {
 }
 
 const club_details = (req, res) => {
-  
+  var links = [] ;
+  Youtube.find().sort({ createdAt: -1 })
+  .then(result => {
+    links = result
+    console.log(links);
+  })
+  .catch(err => {
+    console.log(err);
+  });
   const id = req.params.id;
   Club.findById(id)
     .then(result => {
-      res.render('club_details', { club: result, title: 'Club Details' });
+      res.render('club_details', { club: result, title: 'Club Details' , links : links });
       res.status(200).json({ club: club._id });
     })
     .catch(err => {
@@ -51,17 +88,29 @@ const club_delete = (req, res) => {
     });
 }
 
-const club_create_youtube_post = (req, res) => {
-  const youtube = new Youtube(req.body);
-  //const id = req.params.id;
-  youtube.save()
-    .then(result => {
-      //console.log(id)
-      res.redirect('/clubs');
-    })
-    .catch(err => {
-      console.log(err);
-    });
+// const club_create_youtube_post = (req, res) => {
+//   const youtube = new Youtube(req.body);
+//   youtube.save()
+//     .then(result => {
+//       res.redirect('/clubs');
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// }
+
+const club_create_youtube_post = async (req, res) => {
+  const { link , person } = req.body;
+
+  try {
+    const youtube = await Youtube.create({ link , person });
+    res.status(201).json({ id: youtube._id });
+  }
+  catch(err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
+ 
 }
 
 // const club_search = (req,res, next) => {

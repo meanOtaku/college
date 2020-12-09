@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const youtubeSchema = new Schema({
+const linkSchema = new Schema({
     link: {
         type: String,
         required: true,
@@ -14,5 +14,5 @@ const youtubeSchema = new Schema({
     }
 }, { timestamp: true });
 
-const Youtube = mongoose.model('youtube', youtubeSchema);
-module.exports = Youtube;
+const Links = mongoose.model('links', linkSchema);
+module.exports = Links;

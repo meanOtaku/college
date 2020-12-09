@@ -17,6 +17,26 @@
     </a>
     <% } %> 
   </div>
+  <% if (links.length > 0) { %>
+    <% var val = 0; %> 
+    <% links.forEach(link => { %>
+      <% val = val + 1; %> 
+       <h3><a href="<% link.link %> ">link<% val %> </a></h1> 
+    <% }) %>
+  <% } else { %>
+    <p>There are no links to display...</p>
+  <% } %>
+
+  <form action="/blogs/:id" method="POST">
+    <h2>Paste Link</h2>
+    <label for="link">Custom Links</label>
+    <input type="text" id="link" name="link" required>
+    <label for="person">Email:</label>
+    <input type="text" id="person" name="person" value="<%= user.email %>" required>
+    <button>Save</button>
+  </form>
+
+</div>
 
 
 

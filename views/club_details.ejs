@@ -16,11 +16,26 @@
         <img src="/trashcan.svg" alt="delete icon">
     </a>
     <% } %> 
+    <% if (links.length > 0) { %>
+      <% links.forEach(link => { %>
+          <iframe width="560" height="315" src="<%= link.link %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>There are no Clubs to display...</p>
+    <% } %>
+
+
+
+
     <form action="/clubs/:id" method="POST">
+      <h2>Paste Link</h2>
       <label for="link">Custom Links</label>
-      <input type="text" id="link" name="link">
+      <input type="text" id="link" name="link" required>
+      <div class="link error"></div>
       <label for="person">Email:</label>
-      <input type="text" id="person" name="person" value="<%= user.email %>" >
+      <input type="text" id="person" name="person" value="<%= user.email %>" required>
+      <div class="person error"></div>
       <button>Save</button>
     </form>
 
@@ -45,3 +60,44 @@
   </script>
 </body>
 <%- include('partials/footer'); -%>
+
+
+<script>
+  const form = document.querySelector('form');
+  const linkError = document.querySelector('.link.error');
+  const personError = document.querySelector('.person.error');
+
+  form.addEventListener('Save', async (e) => {
+    e.preventDefault();
+
+    // reset errors
+    linkError.textContent = '';
+    personError.textContent = '';
+
+    // get values
+    const link = form.link.value;
+    const person = form.person.value;
+
+    try {
+      const res = await fetch('/clubs', { 
+        method: 'POST', 
+        body: JSON.stringify({ link, person }),
+        headers: {'Content-Type': 'application/json'}
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.errors) {
+        linkError.textContent = data.errors.link;
+        personError.textContent = data.errors.person;
+      }
+      if (data.user) {
+        location.assign('/');
+      }
+
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+  });
+</script>

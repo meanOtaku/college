@@ -10,6 +10,7 @@ router.get('/', requireAuth, blogController.blog_index);
 router.post('/', requireAuth, blogController.blog_create_post);
 router.get('/:id', requireAuth, blogController.blog_details);
 router.delete('/:id', requireAuth, blogController.blog_delete);
+router.post('/:id', requireAuth, blogController.blog_create_link_post);
 
 
 module.exports = router;
