@@ -6,13 +6,15 @@
 <body>
   <%- include("./partials/nav.ejs") %>
 
-  <div class="create-blog content">
-    <form action="/blogs" method="POST">
+  <div class="create-clubs content">
+    <form action="/clubs" method="POST">
       <label for="title">Club title:</label>
       <input type="text" id="title" name="title" required>
       <label for="body">which Club:</label>
       <textarea id="body" name="body" required></textarea>
-      <button>Submit</button>
+      <label for="person">Email:</label>
+      <input type="text" id="person" name="person" value="<%= user.email %>">
+      <button>Create</button>
     </form>
   </div>
 

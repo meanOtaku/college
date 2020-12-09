@@ -4,6 +4,7 @@ const morgan = require('morgan');
 //routes require
 const authRoutes = require('./routes/authRoutes');
 const blogRoutes = require('./routes/blogRoutes');
+const clubRoutes = require('./routes/clubRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
 
@@ -40,8 +41,11 @@ app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
+
+
 // blog routes
 app.use('/blogs', blogRoutes);
+app.use('/clubs', clubRoutes);
 
 // 404 page
 app.use((req, res) => {

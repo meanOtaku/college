@@ -1,0 +1,24 @@
+<!-- this page is for the blog or in this case notifications -->
+
+<%- include('partials/header'); -%>
+<%- include("./partials/nav.ejs") %>
+
+<body>
+
+  <div class="blogs content">
+    <h2>All Clubs</h2>
+
+    <% if (clubs.length > 0) { %>
+      <% clubs.forEach(club => { %>
+        <a class="single" href="/clubs/<%= club._id %>">
+          <h3 class="title"><%= club.title %></h3>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p>There are no Clubs to display...</p>
+    <% } %>
+    
+  </div>
+
+</body>
+<%- include('partials/footer'); -%>
