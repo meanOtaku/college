@@ -10,6 +10,7 @@ router.get('/', requireAuth, clubController.club_index);
 router.post('/', requireAuth, clubController.club_create_post);
 router.get('/:id', requireAuth, clubController.club_details);
 router.delete('/:id', requireAuth, clubController.club_delete);
+router.post('/:id', requireAuth, clubController.club_create_youtube_post);
 
 
 module.exports = router;

@@ -16,6 +16,14 @@
         <img src="/trashcan.svg" alt="delete icon">
     </a>
     <% } %> 
+    <form action="/clubs/:id" method="POST">
+      <label for="link">Custom Links</label>
+      <input type="text" id="link" name="link">
+      <label for="person">Email:</label>
+      <input type="text" id="person" name="person" value="<%= user.email %>" >
+      <button>Save</button>
+    </form>
+
   </div>
 
 

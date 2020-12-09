@@ -1,5 +1,5 @@
 const Club = require("../models/Club");
-
+const Youtube = require("../models/youtube"); 
 const club_index = (req, res) => {
   Club.find().sort({ createdAt: -1 })
     .then(result => {
@@ -51,6 +51,19 @@ const club_delete = (req, res) => {
     });
 }
 
+const club_create_youtube_post = (req, res) => {
+  const youtube = new Youtube(req.body);
+  //const id = req.params.id;
+  youtube.save()
+    .then(result => {
+      //console.log(id)
+      res.redirect('/clubs');
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+
 // const club_search = (req,res, next) => {
 //   const regex = new RegExp(req.query["term"], 'i');
 //   const club = Club.find({name:regex}, {'name':1}).sort({"updated_at": -1}).sort({"created_at": -1}).limit(20);
@@ -78,4 +91,5 @@ module.exports = {
   club_create_get, 
   club_create_post, 
   club_delete,
+  club_create_youtube_post,
 }
