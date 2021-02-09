@@ -52,7 +52,7 @@ const club_details = (req, res) => {
   .catch(err => {
     console.log(err);
   });
-  youtubeschema
+  
   Club.findById(id)
     .then(result => {
       res.render('club_details', { club: result, title: 'Club Details' , links : links });
