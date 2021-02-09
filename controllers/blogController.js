@@ -11,9 +11,9 @@ const blog_index = (req, res) => {
     });
 }
 
-const blog_details = (req, res) => {
+const blog_details = async (req, res) => {
   var links = [] ;
-  Links.find().sort({ createdAt: -1 })
+  await Links.find().sort({ createdAt: -1 })
   .then(result => {
     links = result
     console.log(links);
@@ -23,7 +23,7 @@ const blog_details = (req, res) => {
   });
   
   const id = req.params.id;
-  Blog.findById(id)
+   await Blog.findById(id)
     .then(result => {
       res.render('details', { blog: result, title: 'Blog Details' , links : links});
       //res.status(200).json({ blog: blog._id });
