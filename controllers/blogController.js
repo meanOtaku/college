@@ -26,12 +26,12 @@ const blog_details = (req, res) => {
   Blog.findById(id)
     .then(result => {
       res.render('details', { blog: result, title: 'Blog Details' , links : links});
-      res.status(200).json({ blog: blog._id });
+      //res.status(200).json({ blog: blog._id });
     })
     .catch(err => {
       console.log(err);
       res.render('404', { title: 'Blog not found' });
-      res.status(200).json({ blog: blog._id });
+      //res.status(200).json({ blog: blog._id });
     });
 }
 

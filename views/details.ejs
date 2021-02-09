@@ -17,24 +17,41 @@
     </a>
     <% } %> 
   </div>
+
+   
+
   <% if (links.length > 0) { %>
     <% var val = 0; %> 
     <% links.forEach(link => { %>
+      <% if (blog._id == link.id) { %>
       <% val = val + 1; %> 
-       <h3><a href="<% link.link %> ">link<% val %> </a></h1> 
-    <% }) %>
+        <h3><a href="<%= link.link %> "> &emsp; <%= link.text %>    <%= val %> </a></h1> 
+          <% } %>
+          <% }) %>
   <% } else { %>
     <p>There are no links to display...</p>
   <% } %>
 
-  <form action="/blogs/:id" method="POST">
-    <h2>Paste Link</h2>
-    <label for="link">Custom Links</label>
-    <input type="text" id="link" name="link" required>
-    <label for="person">Email:</label>
-    <input type="text" id="person" name="person" value="<%= user.email %>" required>
-    <button>Save</button>
-  </form>
+  <% if (blog.person == user.email) { %> 
+    <form action="/blogs/:id" method="POST">
+      <h2>Paste Link</h2>
+      <label for="link">Custom Links</label>
+      <input type="text" id="link" name="link" required>
+
+      <label for="text">Text:</label>
+      <input type="text" id="text" name="text" value="text" required>
+
+      <label for="person">Email:</label>
+      <input type="text" id="person" name="person" value="<%= user.email %>" required>
+
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" value="<%= blog._id %>" required>
+
+      <button>Save</button>
+    </form>
+  <% } %>
+
+  
 
 </div>
 

@@ -8,7 +8,15 @@ const linkSchema = new Schema({
         required: true,
         unique: true,
     },
+    text: {
+        type: String,
+        required: true,
+    },
     person: {
+        type: String,
+        required: true,
+    },
+    id: {
         type: String,
         required: true,
     }

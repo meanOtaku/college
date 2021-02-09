@@ -41,24 +41,25 @@ const club_index = (req, res) => {
 
 const club_details = (req, res) => {
   var links = [] ;
+  const id = req.params.id;
   Youtube.find().sort({ createdAt: -1 })
   .then(result => {
     links = result
     console.log(links);
+    console.log(req.url);
+    console.log(req.params.id);
   })
   .catch(err => {
     console.log(err);
   });
-  const id = req.params.id;
+  youtubeschema
   Club.findById(id)
     .then(result => {
       res.render('club_details', { club: result, title: 'Club Details' , links : links });
-      res.status(200).json({ club: club._id });
     })
     .catch(err => {
       console.log(err);
       res.render('404', { title: 'Club not found' });
-      res.status(200).json({ club: club._id });
     });
 }
 
@@ -100,15 +101,16 @@ const club_delete = (req, res) => {
 // }
 
 const club_create_youtube_post = async (req, res) => {
-  const { link , person } = req.body;
+  const { link , person , id} = req.body;
 
   try {
-    const youtube = await Youtube.create({ link , person });
-    res.status(201).json({ id: youtube._id });
+    const youtube = await Youtube.create({ link , person , id });
+    //res.status(201).json({ id: youtube._id });
+    res.redirect('/clubs');
   }
   catch(err) {
     const errors = handleErrors(err);
-    res.status(400).json({ errors });
+    res.redirect('/404');
   }
  
 }

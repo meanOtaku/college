@@ -14,30 +14,42 @@
     <% if (club.person == user.email) { %> 
       <a class="delete" data-doc="<%= club._id %>">
         <img src="/trashcan.svg" alt="delete icon">
-    </a>
+      </a>
     <% } %> 
+
+    
+
     <% if (links.length > 0) { %>
       <% links.forEach(link => { %>
+        <% if (club._id == link.id) { %> 
+          <br>
           <iframe width="560" height="315" src="<%= link.link %>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </a>
-      <% }) %>
+          <% } %> 
+                <% }) %>
     <% } else { %>
-      <p>There are no Clubs to display...</p>
+      <p>There are no Videos to display...</p>
     <% } %>
 
 
+    <% if (club.person == user.email) { %> 
+      <form action="/clubs/:id" method="POST">
+        <h2>Paste Link</h2>
+        <label for="link">Custom Links</label>
+        <input type="text" id="link" name="link" required>
+        <div class="link error"></div>
+        <label for="person">Email:</label>
+        <input type="text" id="person" name="person" value="<%= user.email %>" required>
+        <div class="person error"></div>
 
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" value="<%= club._id %>" required>
+        <div class="id error"></div>
 
-    <form action="/clubs/:id" method="POST">
-      <h2>Paste Link</h2>
-      <label for="link">Custom Links</label>
-      <input type="text" id="link" name="link" required>
-      <div class="link error"></div>
-      <label for="person">Email:</label>
-      <input type="text" id="person" name="person" value="<%= user.email %>" required>
-      <div class="person error"></div>
-      <button>Save</button>
-    </form>
+        <button>Save</button>
+      </form>
+    <% } %>
+
+    
 
   </div>
 
@@ -67,6 +79,8 @@
   const linkError = document.querySelector('.link.error');
   const personError = document.querySelector('.person.error');
 
+  const idError = document.querySelector('.id.error');
+
   form.addEventListener('Save', async (e) => {
     e.preventDefault();
 
@@ -77,11 +91,12 @@
     // get values
     const link = form.link.value;
     const person = form.person.value;
+    const id = form.id.value;
 
     try {
       const res = await fetch('/clubs', { 
         method: 'POST', 
-        body: JSON.stringify({ link, person }),
+        body: JSON.stringify({ link, person, id }),
         headers: {'Content-Type': 'application/json'}
       });
       const data = await res.json();
@@ -89,6 +104,7 @@
       if (data.errors) {
         linkError.textContent = data.errors.link;
         personError.textContent = data.errors.person;
+        idError.textContent = data.errors.id;
       }
       if (data.user) {
         location.assign('/');

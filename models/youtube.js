@@ -11,6 +11,10 @@ const youtubeSchema = new Schema({
     person: {
         type: String,
         required: true,
+    },
+    id: {
+        type: String,
+        required: true,
     }
 }, { timestamp: true });
 
