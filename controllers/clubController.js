@@ -104,7 +104,8 @@ const club_create_youtube_post = async (req, res) => {
   const { link , person , id} = req.body;
 
   try {
-    if(Youtube.findById(link)){
+    if(Youtube.findById(link)  == 1){
+      console.log(link);
       console.log("alrady there");
       res.redirect('/clubs');
     }
