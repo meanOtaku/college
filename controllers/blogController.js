@@ -63,6 +63,12 @@ const blog_delete = (req, res) => {
 
 const blog_create_link_post = (req, res) => {
      const links = new Links(req.body);
+
+     if(Links.findById(link) == 1){
+      console.log("alrady there");
+      res.redirect('/blogs');
+     }
+     else{
       links.save()
       .then(result => {
        res.redirect('/blogs');
@@ -70,6 +76,9 @@ const blog_create_link_post = (req, res) => {
     .catch(err => {
         console.log(err);
       });
+     }
+
+      
   }
 
 // const blog_search = (req,res, next) => {
