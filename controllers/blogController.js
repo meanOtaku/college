@@ -92,13 +92,13 @@ const blog_delete = (req, res) => {
      } 
   }
 
-const blog_search_get = async (req, res, next) => {
+const blog_search_get = async (req, res) => {
   const searchField = req.query.title;
   console.log("searching");
   console.log(searchField);
    await Blog.find({title:{$regex: searchField,$options: '$i'}})
    .then(data=>{
-      res.render('index', { blogs: data, title: 'Found Blog'});
+      res.render('search', { results: data, title: 'Found Blog'});
       //res.json(data);
       console.log(data);
      //res.send(data);
