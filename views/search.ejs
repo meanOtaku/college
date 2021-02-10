@@ -5,10 +5,10 @@
 
 <body>
 
-  <%- include("./partials/search_p.ejs") %>
+    <%- include("./partials/search_p.ejs") %>
   
   <div class="blogs content">
-    <h2>All Notices</h2>
+    <h2>All Searches</h2>
     <ol id='list'>
     <% if (blogs.length > 0) { %>
       <% blogs.forEach(blog => { %>
@@ -19,7 +19,7 @@
         
       <% }) %>
     <% } else { %>
-      <p>There are no Notice to display...</p>
+      <p>It is not available...</p>
     <% } %>
   </ol> 
   </div>

@@ -19,11 +19,13 @@ ul{
 a{
   text-decoration: none;
 }
-nav{
+nav.second{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 120px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+
 }
 nav ul{
   display: flex;
@@ -125,4 +127,31 @@ footer{
   text-align: center;
   margin-top: 120px;
   color: #aaa;
+}
+form.index{
+  display: flex;
+  position:center;
+  border-radius: 10px;
+  position
+  margin-left: 200px;
+  width: 3600px;
+  margin: 0 auto;
+  padding: 0px;
+  padding-bottom:10px;
+  background:none;
+  box-shadow: 0px 0px 0px;
+  border-radius: 0px;
+}
+.index-search{
+  display: flex;
+      justify-content: left;
+      border-bottom: 1px solid #ddd;
+      text-transform: uppercase;
+}
+.button-index{
+  display: flex;
+  margin-top: 0px;
+  margin-left: 5px;
+  position: relative;
+  size:unset;
 }

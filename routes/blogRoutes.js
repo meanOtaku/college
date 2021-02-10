@@ -9,7 +9,7 @@ router.get('/create', requireAuth, blogController.blog_create_get);
 router.get('/', requireAuth, blogController.blog_index);
 
 //search
-router.get('/search?title=', requireAuth, blogController.blog_search_post);
+router.get('/search', requireAuth, blogController.blog_search_get);
 
 router.post('/', requireAuth, blogController.blog_create_post);
 router.get('/:id', requireAuth, blogController.blog_details);
