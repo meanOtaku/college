@@ -132,7 +132,6 @@ form.index{
   display: flex;
   position:center;
   border-radius: 10px;
-  position
   margin-left: 200px;
   width: 3600px;
   margin: 0 auto;
@@ -145,7 +144,6 @@ form.index{
 .index-search{
   display: flex;
       justify-content: left;
-      border-bottom: 1px solid #ddd;
       text-transform: uppercase;
 }
 .button-index{

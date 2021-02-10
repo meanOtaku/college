@@ -5,16 +5,15 @@
 
 <body>
 
-    <%- include("./partials/search_p.ejs") %>
   
   <div class="blogs content">
     <h2>All Searches</h2>
     <ol id='list'>
-    <% if (blogs.length > 0) { %>
-      <% blogs.forEach(blog => { %>
-        <li class="texts"><a class="single" href="/blogs/<%= blog._id %>">
-          <h3 class="title"><%= blog.title %></h3>
-          <p class="snippet"><%= blog.snippet %></p>
+    <% if (results.length > 0) { %>
+      <% results.forEach(result => { %>
+        <li class="texts"><a class="single" href="/blogs/<%= result._id %>">
+          <h3 class="title"><%= result.title %></h3>
+          <p class="snippet"><%= result.snippet %></p>
         </a></li> 
         
       <% }) %>
