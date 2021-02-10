@@ -57,7 +57,7 @@
 
     /* search bar css */
     .topnav{
-      float: left;
+      float: left
     }
     button{
       margin-top: 30px;
@@ -71,9 +71,6 @@
       padding: 10px 16px;
       letter-spacing: 2px;
       position: relative;
-    }
-    button:hover{
-      cursor: pointer;
     }
 
     /* index styles */

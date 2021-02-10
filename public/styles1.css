@@ -19,13 +19,11 @@ ul{
 a{
   text-decoration: none;
 }
-nav.second{
+nav{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 0;
-  padding-bottom: 0;
-
+  margin-bottom: 120px;
 }
 nav ul{
   display: flex;
@@ -133,7 +131,7 @@ form.index{
   position:center;
   border-radius: 10px;
   margin-left: 200px;
-  width: 3600px;
+  width: 300px;
   margin: 0 auto;
   padding: 0px;
   padding-bottom:10px;
