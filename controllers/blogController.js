@@ -150,5 +150,4 @@ module.exports = {
   blog_delete,
   blog_create_link_post,
   blog_search_get,
-  blog_search_post,
 }
