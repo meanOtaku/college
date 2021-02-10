@@ -42,12 +42,13 @@ const club_index = (req, res) => {
 const club_details = async (req, res) => {
   var links = [] ;
   const id = req.params.id;
-  await Youtube.find().sort({ createdAt: -1 })
+  console.log(req.params.id);
+  await Youtube.find({id: id}).sort({ createdAt: -1 })
   .then(result => {
     links = result
     console.log(links);
     console.log(req.url);
-    console.log(req.params.id);
+    
   })
   .catch(err => {
     console.log(err);
@@ -80,6 +81,17 @@ const club_create_post = (req, res) => {
 
 const club_delete = (req, res) => {
   const id = req.params.id;
+  console.log(req.params.id);
+  console.log(id);
+  Youtube.deleteMany({id: id})
+    .then(result => {
+
+      console.log("DELETED")
+      //res.json({ redirect: '/clubs' });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   Club.findByIdAndDelete(id)
     .then(result => {
       res.json({ redirect: '/clubs' });

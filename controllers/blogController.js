@@ -13,7 +13,9 @@ const blog_index = (req, res) => {
 
 const blog_details = async (req, res) => {
   var links = [] ;
-  await Links.find().sort({ createdAt: -1 })
+  const id = req.params.id;
+  console.log(req.params.id);
+  await Links.find({id: id}).sort({ createdAt: -1 })
   .then(result => {
     links = result
     console.log(links);
@@ -22,7 +24,7 @@ const blog_details = async (req, res) => {
     console.log(err);
   });
   
-  const id = req.params.id;
+  
    await Blog.findById(id)
     .then(result => {
       res.render('details', { blog: result, title: 'Blog Details' , links : links});
@@ -52,6 +54,17 @@ const blog_create_post = (req, res) => {
 
 const blog_delete = (req, res) => {
   const id = req.params.id;
+  console.log(req.params.id);
+  console.log(id);
+  Links.deleteMany({id: id})
+    .then(result => {
+
+      console.log("DELETED")
+      //res.json({ redirect: '/clubs' });
+    })
+    .catch(err => {
+      console.log(err);
+    });
   Blog.findByIdAndDelete(id)
     .then(result => {
       res.json({ redirect: '/blogs' });
@@ -61,25 +74,37 @@ const blog_delete = (req, res) => {
     });
 }
 
-const blog_create_link_post = (req, res) => {
-     const links = new Links(req.body);
+// const blog_create_link_post = (req, res) => {
+//      const links = new Links(req.body);
+//      console.log(links.link);
+//       links.save()
+      
+//       .then(result => {
+//        res.redirect('/blogs');
+//     })
+//     .catch(err => {
+//         console.log(err);
+//       });
+//   }
 
-     if(Links.findById(link) == 1){
+   const blog_create_link_post = async (req, res) => {
+     const links = new Links(req.body);
+     if(Links.findById(links.link) == 1){
       console.log("alrady there");
       res.redirect('/blogs');
      }
      else{
-      links.save()
+      await links.save()
       .then(result => {
        res.redirect('/blogs');
     })
     .catch(err => {
         console.log(err);
       });
-     }
-
-      
+     } 
   }
+
+
 
 // const blog_search = (req,res, next) => {
 //   const regex = new RegExp(req.query["term"], 'i');
