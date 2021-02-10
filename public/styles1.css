@@ -19,11 +19,11 @@ ul{
 a{
   text-decoration: none;
 }
-nav{
+nav.first{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 120px;
+  margin-bottom: 10px;
 }
 nav ul{
   display: flex;
@@ -128,7 +128,7 @@ footer{
 }
 form.index{
   display: flex;
-  position:center;
+  position:relative;
   border-radius: 10px;
   margin-left: 200px;
   width: 300px;
@@ -138,11 +138,12 @@ form.index{
   background:none;
   box-shadow: 0px 0px 0px;
   border-radius: 0px;
+  right: -200px;
 }
 .index-search{
   display: flex;
-      justify-content: left;
-      text-transform: uppercase;
+  justify-content: right;
+  text-transform: uppercase;
 }
 .button-index{
   display: flex;
