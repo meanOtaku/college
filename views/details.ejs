@@ -25,7 +25,7 @@
     <% links.forEach(link => { %>
       <% if (blog._id == link.id) { %>
       <% val = val + 1; %> 
-        <h3><a href="<%= link.link %> "> &emsp; <%= link.text %>    <%= val %> </a></h1> 
+        <h3><a href="<%= link.link %> "> &emsp; <%= val %> : <%= link.text %>    </a></h1> 
           <% } %>
           <% }) %>
   <% } else { %>
