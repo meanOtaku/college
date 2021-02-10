@@ -74,18 +74,6 @@ const blog_delete = (req, res) => {
     });
 }
 
-// const blog_create_link_post = (req, res) => {
-//      const links = new Links(req.body);
-//      console.log(links.link);
-//       links.save()
-      
-//       .then(result => {
-//        res.redirect('/blogs');
-//     })
-//     .catch(err => {
-//         console.log(err);
-//       });
-//   }
 
    const blog_create_link_post = async (req, res) => {
      const links = new Links(req.body);
