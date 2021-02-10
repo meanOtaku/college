@@ -104,7 +104,17 @@ const blog_delete = (req, res) => {
      } 
   }
 
-
+const blog_search_post = async (req, res) => {
+  const searchField = req.query.title;
+   await Blog.find({title:{$regex: searchField,$options: '$i'}})
+   .then(data=>{
+      res.render('index', { blogs: data, title: 'Found Blog'});
+      //console.log(data);
+   })
+   .catch(err => {
+    console.log(err);
+  });
+}
 
 // const blog_search = (req,res, next) => {
 //   const regex = new RegExp(req.query["term"], 'i');
@@ -133,6 +143,7 @@ module.exports = {
   blog_create_get, 
   blog_create_post, 
   blog_delete,
-  blog_create_link_post
+  blog_create_link_post,
+  blog_search_post,
  
 }
