@@ -165,7 +165,7 @@
       border-radius: 10px; 
     } 
   
-    input[type=text] { 
+    input.searchtext[type=text] { 
        width: 50%; 
        -webkit-transition: width 0.15s ease-in-out; 
        transition: width 0.15s ease-in-out; 
@@ -173,7 +173,7 @@
   
     /* When the input field gets focus, 
          change its width to 100% */
-    input[type=text]:focus { 
+    input.searchtext[type=text]:focus { 
       width: 100%; 
     } 
   
